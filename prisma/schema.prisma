@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String   @db.VarChar(255)
+  content   String?
+  published Boolean  @default(false)
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+}
+
+model Profile {
+  id            Int      @id @default(autoincrement())
+  bio           String?  // User's bio or description
+  location      String?  // User's location
+  verifiedUser   Boolean  @default(false) // Indicates whether the user is verified
+  premium        Boolean  @default(false) // Indicates whether the user has a premium account
+  badge          String?  // Optional field for user badges or achievements
+  interests      String[] // List of tags or interests
+  followersCount Int      @default(0) // Number of followers
+  followingCount Int      @default(0) // Number of people the user is following
+  postCount      Int      @default(0) // Number of posts made by the user
+  website       String?  // User's personal or professional website URL
+  dateOfBirth    DateTime? // User's date of birth
+  profilePicture String? // URL or path to the profile picture
+  socialLinks   Json?    // JSON field to store social media links (e.g., Twitter, LinkedIn)
+  user          User     @relation(fields: [userId], references: [id])
+  userId        Int      @unique
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  avatar         String?  // URL or path to the avatar image
+  name           String
+  email          String   @unique
+  username       String   @unique
+  accountType    String   // e.g., 'google', 'email-password'
+  password       String?  // Optional if using external authentication (e.g., Google)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
