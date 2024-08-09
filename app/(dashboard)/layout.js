@@ -7,9 +7,8 @@ function RootLayout({ children }) {
   return (
     <>
       <div className="flex justify-between">
-        
         <NavMenuLeft />
-        {children}
+        <div className="w-full">{children}</div>
         <NavMenuRight />
       </div>
     </>

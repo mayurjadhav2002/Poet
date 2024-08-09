@@ -4,7 +4,8 @@ import Link from "next/link";
 import React from "react";
 import { IoIosSearch } from "react-icons/io";
 import { MdExplore } from "react-icons/md";
-import { AiTwotoneHome } from "react-icons/ai";
+import { FaRegCircleUser } from "react-icons/fa6";
+import { AiOutlineProfile, AiTwotoneHome } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import { IoNotificationsOutline, IoCreateOutline } from "react-icons/io5";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -12,16 +13,19 @@ import { Label } from "../ui/label";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { CiUser } from "react-icons/ci";
 
 function NavMenuLeft() {
   return (
-    <div className="h-screen w-1/4 flex flex-col justify-between border-e-2">
-      <div className="">
+    <div className="h-screen w-2/5 flex flex-col items-end justify-between border-e-2">
+      <div className="w-full max-w-[300px]">
         <Image
           src="/image/logo/Shayar.jpg"
           width={158}
@@ -32,7 +36,7 @@ function NavMenuLeft() {
         <ul className="space-y-2 font-medium px-5 py-2">
           <li>
             <Link
-              href="#"
+              href="/home"
               className="flex items-center py-2 px-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 active:bg-gray-50 dark:hover:bg-gray-700 group"
             >
               <AiTwotoneHome className="w-6 h-6" />
@@ -42,7 +46,7 @@ function NavMenuLeft() {
 
           <li>
             <Link
-              href="#"
+              href="/search"
               className="flex items-center py-2 px-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
             >
               <IoIosSearch className="w-6 h-6" />
@@ -62,10 +66,15 @@ function NavMenuLeft() {
 
           <li>
             <Link
-              href="#"
-              className="flex items-center py-2 px-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              href="/notification"
+              className="flex  items-center py-2 px-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
             >
-              <IoNotificationsOutline className="w-6 h-6" />
+              <div className="relative inline-flex items--center">
+                <IoNotificationsOutline className="w-6 h-6" />
+                <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+                  20
+                </div>
+              </div>
               <p className="ms-3 font-sans text-lg font-normal">Notification</p>
             </Link>
           </li>
@@ -79,11 +88,20 @@ function NavMenuLeft() {
               <p className="ms-3 font-sans text-lg font-normal">Create</p>
             </Link>
           </li>
+          <li>
+            <Link
+              href="#"
+              className="flex items-center py-2 px-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <FaRegCircleUser className="w-6 h-6" />
+              <p className="ms-3 font-sans text-lg font-normal">Profile</p>
+            </Link>
+          </li>
         </ul>
       </div>
-      <ul className="space-y-2 font-medium px-5 py-2">
+      <ul className="space-y-2 font-medium px-5 py-2 w-full max-w-[300px]">
         <li>
-          <Link
+          <div
             href="#"
             className="flex items-center justify-between py-2 px-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
           >
@@ -103,16 +121,48 @@ function NavMenuLeft() {
               <DropdownMenuTrigger className="hover:bg-gray-200 p-1 rounded-sm">
                 <BsThreeDots className="w-4 h-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
+              <DropdownMenuContent className="min-w-44 max-w-auto">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team</DropdownMenuItem>
-                <DropdownMenuItem>Subscription</DropdownMenuItem>
+                <DropdownMenuGroup>
+                  <DropdownMenuItem>
+                    <CiUser className="mr-2 h-4 w-4" />
+                    <span>Profile</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <CiUser className="mr-2 h-4 w-4" />
+                    <span>App Preferences</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <CiUser className="mr-2 h-4 w-4" />
+                    <span>Achievements</span>
+                  </DropdownMenuItem>
+                  </DropdownMenuGroup>
+
+
+                  <DropdownMenuSeparator/>
+
+
+
+                  <DropdownMenuGroup>
+                  <DropdownMenuItem>
+                    <CiUser className="mr-2 h-4 w-4" />
+                    <span>Settings</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <CiUser className="mr-2 h-4 w-4" />
+                    <span>Help & Support</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <CiUser className="mr-2 h-4 w-4" />
+                    <span>Analytics</span>
+                  </DropdownMenuItem>
+                  
+                  
+                </DropdownMenuGroup>
               </DropdownMenuContent>
             </DropdownMenu>
-          </Link>
+          </div>
         </li>
       </ul>
     </div>
