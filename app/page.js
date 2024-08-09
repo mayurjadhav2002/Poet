@@ -4,7 +4,7 @@ import React from 'react'
 function Home() {
   return (
     <div>
-      <InputField placeholder="Name" />
+      Under development
     </div>
   )
 }
