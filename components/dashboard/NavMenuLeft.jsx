@@ -1,13 +1,13 @@
-import { DotFilledIcon, HomeIcon } from "@radix-ui/react-icons";
+import { DotFilledIcon, GearIcon, HomeIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { IoIosSearch } from "react-icons/io";
-import { MdExplore } from "react-icons/md";
+import { MdAutoFixHigh, MdExplore } from "react-icons/md";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { AiOutlineProfile, AiTwotoneHome } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
-import { IoNotificationsOutline, IoCreateOutline } from "react-icons/io5";
+import { IoNotificationsOutline, IoCreateOutline, IoAnalytics, IoMedal } from "react-icons/io5";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "../ui/label";
 import {
@@ -21,23 +21,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { CiUser } from "react-icons/ci";
-
+import { FaLifeRing } from "react-icons/fa";
+import "@/styles/Dashboard.min.css"
 function NavMenuLeft() {
   return (
     <div className="h-screen w-2/5 flex flex-col items-end justify-between border-e-2">
       <div className="w-full max-w-[300px]">
-        <Image
-          src="/image/logo/Shayar.jpg"
-          width={158}
-          height={58}
-          alt={"App logo"}
-          className="mx-auto mt-5"
-        />
+        <p className="text-3xl text-center my-5 font-bold first-letter:text-blue-700 palanquin-dark-bold">Shayar</p>
         <ul className="space-y-2 font-medium px-5 py-2">
           <li>
             <Link
               href="/home"
-              className="flex items-center py-2 px-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 active:bg-gray-50 dark:hover:bg-gray-700 group"
+              className="flex items-center py-2 px-4 text-gray-900 rounded-e-lg dark:text-white hover:bg-gray-100 active:bg-gray-50 dark:hover:bg-gray-700 group
+              bg-blue-200  dark:bg-gray-900 border-l-4 border-blue-700   group-hover:bg-blue-600 group-active:bg-blue-700
+              "
             >
               <AiTwotoneHome className="w-6 h-6" />
               <p className="ms-3 font-sans text-lg font-semibold">Home</p>
@@ -81,7 +78,7 @@ function NavMenuLeft() {
 
           <li>
             <Link
-              href="#"
+              href="/new"
               className="flex items-center py-2 px-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
             >
               <IoCreateOutline className="w-6 h-6" />
@@ -130,11 +127,11 @@ function NavMenuLeft() {
                     <span>Profile</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <CiUser className="mr-2 h-4 w-4" />
+                    <MdAutoFixHigh className="mr-2 h-4 w-4" />
                     <span>App Preferences</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <CiUser className="mr-2 h-4 w-4" />
+                    <IoMedal className="mr-2 h-4 w-4" />
                     <span>Achievements</span>
                   </DropdownMenuItem>
                   </DropdownMenuGroup>
@@ -146,15 +143,15 @@ function NavMenuLeft() {
 
                   <DropdownMenuGroup>
                   <DropdownMenuItem>
-                    <CiUser className="mr-2 h-4 w-4" />
+                    <GearIcon className="mr-2 h-4 w-4" />
                     <span>Settings</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <CiUser className="mr-2 h-4 w-4" />
+                    <FaLifeRing className="mr-2 h-4 w-4" />
                     <span>Help & Support</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <CiUser className="mr-2 h-4 w-4" />
+                    <IoAnalytics className="mr-2 h-4 w-4" />
                     <span>Analytics</span>
                   </DropdownMenuItem>
                   
