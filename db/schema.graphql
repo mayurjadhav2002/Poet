@@ -1,0 +1,306 @@
+# Post model
+type Post {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  postType: String!
+  title: String
+  content: String!
+  published: Boolean!
+  author: User!
+  authorId: Int!
+  likes: [PostLike!]!
+  comments: [Comment!]!
+  views: [View!]!
+  shares: [Share!]!
+  likeCount: Int!
+  commentCount: Int!
+  viewCount: Int!
+  frameDesign: FrameDesign
+}
+
+type FrameDesign {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  frameType: String!
+  frameColor: String
+  frameBorder: String
+  frameBackground: String
+  frameBackgroundImage: String
+  frameBackgroundImagePosition: String
+  frameBackgroundColor: String
+  frameFont: String
+  frameFontSize: String
+  frameAsImage: String
+  post: Post!
+}
+
+# Profile model
+type Profile {
+  id: Int!
+  bio: String
+  location: String
+  verifiedUser: Boolean!
+  premium: Boolean!
+  badge: String
+  interests: [String!]!
+  followers: [User!]!
+  following: [User!]!
+  followersCount: Int!
+  followingCount: Int!
+  postCount: Int!
+  website: String
+  dateOfBirth: DateTime
+  profilePicture: String
+  socialLinks: JSON
+  user: User!
+  userId: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# User model
+type User {
+  id: Int!
+  avatar: String
+  name: String!
+  email: String!
+  username: String!
+  accountType: String!
+  password: String
+  profile: Profile!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type PostLike {
+  id: Int!
+  postId: Int!
+  userId: Int!
+  actionType: String! # e.g., 'like', 'love', 'upvote', etc.
+  post: Post!
+  user: User!
+}
+
+type Comment {
+  id: Int!
+  postId: Int!
+  userId: Int!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  post: Post!
+  user: User!
+  replies: [Reply!] # Replies to the comment
+  commentLike: [CommentLike!] # Likes on the comment
+  commentLikeCount: Int!
+}
+type Reply {
+  id: Int!
+  commentId: Int!
+  postId: Int!
+  userId: Int!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  comment: Comment!
+  user: User!
+  replies: [Reply!]
+  replyLike: [CommentLike!]
+}
+
+type CommentLike {
+  id: Int!
+  commentId: Int!
+  userId: Int!
+  actionType: String! # e.g., 'like', 'love', 'upvote', etc.
+  comment: Comment!
+  user: User!
+}
+
+type View {
+  id: Int!
+  postId: Int!
+  userId: Int!
+  createdAt: DateTime!
+  post: Post!
+  user: User
+}
+
+type Share {
+  id: Int!
+  postId: Int!
+  userId: Int
+  sharedAt: DateTime!
+  post: Post!
+  user: User
+}
+
+# Queries for retrieving data
+type Query {
+  post(id: Int!): Post
+  posts: [Post!]!
+  postWithFrameDesign(id: Int!): Post
+  profile(id: Int!): Profile
+  profiles: [Profile!]!
+  user(id: Int!): User
+  users: [User!]!
+  frameDesign(id: Int!): FrameDesign
+  frameDesigns: [FrameDesign!]!
+  comment(id: Int!): Comment
+  comments(postId: Int!): [Comment!]!
+  reply(id: Int!): Reply
+  replies(commentId: Int!): [Reply!]!
+  postLike(id: Int!): PostLike
+  postLikes(postId: Int!): [PostLike!]!
+  commentLike(id: Int!): CommentLike
+  commentLikes(commentId: Int!): [CommentLike!]!
+  view(id: Int!): View
+  views(postId: Int!): [View!]!
+  share(id: Int!): Share
+  shares(postId: Int!): [Share!]!
+}
+
+# Mutations for creating, updating, and deleting data
+type Mutation {
+  createPost(
+    title: String!
+    content: String
+    published: Boolean!
+    authorId: Int!
+    frameDesignId: Int
+  ): Post!
+
+  updatePost(
+    id: Int!
+    title: String
+    content: String
+    published: Boolean
+    authorId: Int
+    frameDesignId: Int
+  ): Post!
+
+  deletePost(id: Int!): Post!
+
+  createProfile(
+    bio: String
+    location: String
+    verifiedUser: Boolean
+    premium: Boolean
+    badge: String
+    interests: [String!]!
+    followersCount: Int
+    followingCount: Int
+    postCount: Int
+    website: String
+    dateOfBirth: DateTime
+    profilePicture: String
+    socialLinks: JSON
+    userId: Int!
+  ): Profile!
+
+  updateProfile(
+    id: Int!
+    bio: String
+    location: String
+    verifiedUser: Boolean
+    premium: Boolean
+    badge: String
+    interests: [String!]!
+    followersCount: Int
+    followingCount: Int
+    postCount: Int
+    website: String
+    dateOfBirth: DateTime
+    profilePicture: String
+    socialLinks: JSON
+  ): Profile!
+
+  deleteProfile(id: Int!): Profile!
+
+  createUser(
+    avatar: String
+    name: String!
+    email: String!
+    username: String!
+    accountType: String!
+    password: String
+  ): User!
+
+  updateUser(
+    id: Int!
+    avatar: String
+    name: String
+    email: String
+    username: String
+    accountType: String
+    password: String
+  ): User!
+
+  deleteUser(id: Int!): User!
+
+  createFrameDesign(
+    frameType: String!
+    frameColor: String
+    frameBorder: String
+    frameBackground: String
+    frameBackgroundImage: String
+    frameBackgroundImagePosition: String
+    frameBackgroundColor: String
+    frameFont: String
+    frameFontSize: String
+    frameAsImage: String
+  ): FrameDesign!
+
+  updateFrameDesign(
+    id: Int!
+    frameType: String
+    frameColor: String
+    frameBorder: String
+    frameBackground: String
+    frameBackgroundImage: String
+    frameBackgroundImagePosition: String
+    frameBackgroundColor: String
+    frameFont: String
+    frameFontSize: String
+    frameAsImage: String
+  ): FrameDesign!
+
+  deleteFrameDesign(id: Int!): FrameDesign!
+
+  createPostLike(postId: Int!, userId: Int!, actionType: String!): PostLike!
+  deletePostLike(id: Int!): PostLike!
+
+  createComment(postId: Int!, userId: Int!, content: String!): Comment!
+  updateComment(id: Int!, content: String!): Comment!
+  deleteComment(id: Int!): Comment!
+
+  createReply(
+    commentId: Int!
+    postId: Int!
+    userId: Int!
+    content: String!
+  ): Reply!
+  updateReply(id: Int!, content: String!): Reply!
+  deleteReply(id: Int!): Reply!
+
+  createCommentLike(
+    commentId: Int!
+    userId: Int!
+    actionType: String!
+  ): CommentLike!
+  deleteCommentLike(id: Int!): CommentLike!
+
+  createView(postId: Int!, userId: Int!): View!
+  deleteView(id: Int!): View!
+
+  createShare(postId: Int!, userId: Int): Share!
+  deleteShare(id: Int!): Share!
+}
+
+# Scalar type for DateTime
+scalar DateTime
+
+# Scalar type for JSON
+scalar JSON
