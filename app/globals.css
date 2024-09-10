@@ -70,33 +70,3 @@
 
 
 
-.content-container {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 6; /* Adjust based on how many lines you want to show */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  position: relative;
-  max-height: 6em; /* Adjust based on line-height and number of lines */
-  line-height: 1.5em; /* Adjust based on your font size */
-}
-.content-container p {
-  margin: 0;
-  line-height: 1.5;
-}
-
-.read-more {
-  position: absolute;
-  bottom: 10px; /* Adjust based on your design */
-  left: 0;
-  width: 100%;
-  text-align: center;
-  background: white; /* Adjust based on your design */
-  padding: 5px;
-}
-
-.read-more a {
-  text-decoration: none;
-  color: blue; /* Adjust based on your design */
-  font-weight: bold;
-}
